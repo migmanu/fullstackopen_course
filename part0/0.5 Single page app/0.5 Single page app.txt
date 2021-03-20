@@ -11,6 +11,7 @@ and encounters request for
 JSON data on server 
 end note
 
+browser --> server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
 server --> browser: data in JSON format
 
 note over browser:
