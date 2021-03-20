@@ -9,5 +9,5 @@ I followed the recommended structure:
 - part0
   - 0.4 new note
   - 0.5 Single page app
-  - 0.6 new note
+  - 0.6 New note
 etc.
