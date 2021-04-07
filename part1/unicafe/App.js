@@ -26,11 +26,50 @@ const Statistics = (props) => {
   return (
     <div>
       <h2>Statistics</h2>
-      <Statistic name="Good" value={props.good} />
-      <Statistic name="Neutral" value={props.neutral} />
-      <Statistic name="Bad" value={props.bad} />
-      <Statistic name="Average" value={props.average} />
-      <Statistic name="Positive" value={props.positive} />
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              <Statistic name="Good"/> 
+            </td>
+            <td>
+            <Statistic value={props.good} />
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <Statistic name="Neutral" />
+            </td>
+            <td>
+              <Statistic value={props.neutral} />
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <Statistic name="Bad" />
+            </td>
+            <td>
+              <Statistic value={props.bad} />
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <Statistic name="Average" />
+            </td>
+            <td>
+              <Statistic value={props.average} />
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <Statistic name="Positive" />
+            </td>
+            <td>
+              <Statistic value={props.positive} />
+            </td>
+          </tr>
+        </tbody>
+        </table>
     </div>
   )
   
@@ -84,7 +123,4 @@ const App = () => {
 }
 
   
-
-
-
 export default App
