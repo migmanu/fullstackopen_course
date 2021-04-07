@@ -6,6 +6,21 @@ const Button = (props) => {
   )
 }
 
+const MostVoted = (props) => {
+  var inx= props.votes.indexOf(Math.max(...props.votes))
+  if (Math.max(...props.votes) === 0) {
+    return (
+      <p>No votes yet!</p>
+    )
+  }
+  return (
+    <p>
+      {props.anecdotes[inx]}
+    </p>
+
+  )
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often',
@@ -30,12 +45,15 @@ const App = () => {
     votes_copy[selected]  += 1
     setVotes(votes_copy)
   }
-  console.log(votes)
+  
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p>
       <Button method={handleVotes} name='Vote' />
       <Button method={handleSelected} name='Next anecdote' />
+      <h2>Anecdote with most votes</h2>
+      <MostVoted votes={votes} anecdotes={anecdotes} />
     </div>
   )
 }
