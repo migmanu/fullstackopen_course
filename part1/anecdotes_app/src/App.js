@@ -17,7 +17,6 @@ const MostVoted = (props) => {
     <p>
       {props.anecdotes[inx]}
     </p>
-
   )
 }
 
@@ -33,8 +32,6 @@ const App = () => {
    
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(Array.apply(null, Array(anecdotes.length)).map(Number.prototype.valueOf,0))
-
-  
 
   const handleSelected = () => {
     setSelected(Math.floor(Math.random() * (anecdotes.length - 0) + 0))
