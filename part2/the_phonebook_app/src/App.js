@@ -6,7 +6,15 @@ const App = () => {
   ]) 
   const [ newName, setNewName ] = useState('')
 
+
   const addPerson = (event) => {
+  
+    let names = persons.map(person => person.name)
+
+    if (names.some((name) => name === newName)) {
+      return window.alert(`${newName} is already added to the phonebook`)
+    }
+
     event.preventDefault()
     const personObject = {
       name: newName
@@ -15,12 +23,12 @@ const App = () => {
     setNewName('')
   }
 
+  
   const handleNewName = (event) => {
-    console.log(event.target.value) 
     setNewName(event.target.value)
-
   }
 
+  
   return (
     <div>
       <h2>Phonebook</h2>
