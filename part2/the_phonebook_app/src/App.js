@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import PersonForm from './components/PersonForm'
+import Filter from './components/Filter'
+import ShowPersons from './components/ShowPersons'
 
 const App = () => {
   const [ persons, setPersons ] = useState([
@@ -12,25 +15,6 @@ const App = () => {
   const [ search, setSearch ] = useState('')
   const [ toShow, setToShow] = useState(persons)
 
-
-  const addPerson = (event) => {
-    let names = persons.map(person => person.name)
-    event.preventDefault()
-
-    if (names.some((name) => name === newName)) {
-      return window.alert(`${newName} is already added to the phonebook`)
-    }
-
-    const personObject = {
-      name: newName,
-      number: newNumber 
-    }
-    setPersons(persons.concat(personObject))
-    setNewName('')
-    setNewNumber('')
-    setToShow(toShow.concat(personObject))
-  }
-  
   const handleNewName = (event) => {
     setNewName(event.target.value) 
   }
@@ -38,7 +22,7 @@ const App = () => {
   const handleNewNumber = (event) => {
     setNewNumber(event.target.value)
   }
-  
+
   const handleSearch = (event) => {
     setSearch(event.target.value)
     showElements(event.target.value, persons)
@@ -58,31 +42,14 @@ const App = () => {
  
   return (
     <div>
-      <h1>Phonebook</h1>
-      filter contacts by name<input value={search}
-      onChange={handleSearch}/>
-      <h2>Add new</h2>
-      <form onSubmit={addPerson}>
-        <div>
-          name: <input value={newName} 
-          onChange={handleNewName} />
-        </div>
-        <div>
-          number: <input value={newNumber}
-          onChange={handleNewNumber} />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
-      <ul>
-         {toShow.map(entry =>
-          <li key={entry.name}>
-            {entry.name}  {entry.number}
-          </li>
-      )}
-      </ul>
+      <h2>Phonebook</h2>
+      <Filter search={search} handleSearch={handleSearch} />
+      <h3>Add new</h3>
+      <PersonForm persons={persons} setPersons={setPersons} newName={newName} setNewName={setNewName} 
+        newNumber={newNumber} setNewNumber={setNewNumber} toShow={toShow} setToShow={setToShow} 
+        handleNewName={handleNewName} handleNewNumber={handleNewNumber} />
+      <h3>Numbers</h3>
+      <ShowPersons toShow={toShow} />
     </div>
   )
 }
