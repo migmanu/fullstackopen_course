@@ -1,6 +1,7 @@
 import React from 'react'
 
 const ShowPersons = (props) => {
+    //  returns list of persons to show. Input: array
     return (
         <div>
             <ul>

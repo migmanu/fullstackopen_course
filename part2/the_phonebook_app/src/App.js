@@ -1,19 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PersonForm from './components/PersonForm'
 import Filter from './components/Filter'
 import ShowPersons from './components/ShowPersons'
+import axios from 'axios'
 
 const App = () => {
-  const [ persons, setPersons ] = useState([
-    { name: 'Arto Hellas', number: '040-123456' },
-    { name: 'Ada Lovelace', number: '39-44-5323523' },
-    { name: 'Dan Abramov', number: '12-43-234345' },
-    { name: 'Mary Poppendieck', number: '39-23-6423122' }
-  ]) 
+  const [ persons, setPersons ] = useState([])
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber] = useState('')
   const [ search, setSearch ] = useState('')
   const [ toShow, setToShow] = useState(persons)
+
+
+  useEffect(() => {
+    /* fetches persons array from local server. Sets persons and sets toShow   
+    so the app displays whole name list if no search is performed  */
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        setPersons(response.data)
+        setToShow(response.data)
+      })
+  }, [])
+
 
   const handleNewName = (event) => {
     setNewName(event.target.value) 
@@ -29,15 +38,16 @@ const App = () => {
   }
 
   const showElements = (search, persons) => {
-    const elementMatchList = []
+    //  compares search state with persons names. Case insensitive. Returns array with matched elements.  
+    const elementMatchArray = []
 
     persons.forEach(element => {
       if (element.name.substring(0, search.length).toLowerCase() === search.toLowerCase()) {
-        elementMatchList.push({name: element.name, number: element.number})
+        elementMatchArray.push({name: element.name, number: element.number})
         }
       }
     )
-    setToShow(elementMatchList)
+    setToShow(elementMatchArray)
   }
  
   return (
