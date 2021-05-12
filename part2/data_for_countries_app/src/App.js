@@ -14,27 +14,22 @@ function App() {
   useEffect(() => {
     axios
       .get(query)
-
       .then(response => {
-        console.log('promise fulfilled')
         setCountries(response.data)
       }).catch(err => {
-        if (err.response.status === 404) {
-          console.log('no valid response obtained');
+        if (err.response && err.response.status === 404) {
+          console.clear()
           setCountries([])
         }
       })
-
   }, [query])
 
-  
 
   const handleSearch = (event) => {
     setSearch(event.target.value)
     setQuery('https://restcountries.eu/rest/v2/name/' + event.target.value)
   }
 
-  console.log('countries array', countries);
 
   return (
     <div>
@@ -42,9 +37,10 @@ function App() {
         Data for countries App
       </h1>
       <SearchBar search={search} handleSearch={handleSearch} />
-      <ShowCountries countries={countries} />
+      <ShowCountries countries={countries} setCountries={setCountries} setQuery={setQuery}/>
     </div>
   );
 }
+
 
 export default App;

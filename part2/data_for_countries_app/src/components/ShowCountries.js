@@ -1,4 +1,6 @@
 import React from 'react'
+import CountryButton from './CountryButton'
+
 
 const ShowCountries = (props) => {
     /* Takes countries array as input. 
@@ -22,7 +24,7 @@ const ShowCountries = (props) => {
                 <ul style={{ listStyleType: "none", margin: 0, padding: 0 }}>
                     {props.countries.map(entry => 
                     <li key={entry.numericCode}>
-                        {entry.name}
+                        {entry.name} <CountryButton entry={entry} setQuery={props.setQuery} />
                     </li>)
                     }
                 </ul>
