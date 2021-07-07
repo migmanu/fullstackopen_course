@@ -5,12 +5,14 @@ import ShowCountries from './components/ShowCountries'
 import './App.css';
 
 
-function App() {
+const App = () => {
   const [countries, setCountries] = useState([])
   const [search, setSearch] = useState('')
-  const [query, setQuery] = useState('https://restcountries.eu/rest/v2/name/')
-
-
+  const [query, setQuery] = useState('https://restcountries.eu')
+  const [ weather, setWeather] = useState({})
+  const api_key = process.env.REACT_APP_API_KEY
+  const [ weatherQuery, setWeatherQuery] = useState(`http://api.weatherstack.com/current?access_key=${api_key}&query=Paris`)
+ 
   useEffect(() => {
     axios
       .get(query)
@@ -18,16 +20,30 @@ function App() {
         setCountries(response.data)
       }).catch(err => {
         if (err.response && err.response.status === 404) {
-          console.clear()
           setCountries([])
         }
       })
   }, [query])
 
+  
+  useEffect(() => {
+    axios
+      .get(weatherQuery)
+      .then(response => {
+        setWeather(response.data) 
+      }).catch(err => {
+      })
+  }, [weatherQuery, api_key]);
+
 
   const handleSearch = (event) => {
     setSearch(event.target.value)
     setQuery('https://restcountries.eu/rest/v2/name/' + event.target.value)
+  }
+
+  const handleWeatherQuery = () => {
+    const new_weather_query = `http://api.weatherstack.com/current?access_key=${api_key}&query=${countries[0].capital}`
+    setWeatherQuery(new_weather_query)
   }
 
 
@@ -37,7 +53,8 @@ function App() {
         Data for countries App
       </h1>
       <SearchBar search={search} handleSearch={handleSearch} />
-      <ShowCountries countries={countries} setCountries={setCountries} setQuery={setQuery}/>
+      <ShowCountries countries={countries} setQuery={setQuery} weather={weather}
+      handleWeatherQuery={handleWeatherQuery} />
     </div>
   );
 }

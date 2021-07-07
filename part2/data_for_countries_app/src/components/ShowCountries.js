@@ -1,14 +1,15 @@
 import React from 'react'
 import CountryButton from './CountryButton'
+import ShowOneCountry from './ShowOneCountry'
+import ShowWeather from './ShowWeather'
 
 
 const ShowCountries = (props) => {
     /* Takes countries array as input. 
-    If array lenght > 10: returns text soliciting mor filters.
+    If array lenght > 10: returns text soliciting more filters.
     If countries array lenght > 1 and < 10 returns list of matching countries. Uses
     countries numericCode as list item keys.
     If countries array lenght === 1 returns country details.*/
-
 
     if (props.countries.length > 10) {
         return (
@@ -33,27 +34,20 @@ const ShowCountries = (props) => {
     }
 
     if (props.countries.length === 1) {
+        props.handleWeatherQuery()
         return (
             <div>
-                <h2>{props.countries[0].name}</h2>
-                <p>capital: {props.countries[0].capital}</p>
-                <p>population: {props.countries[0].population}</p>
-                <h3>Languages</h3>
-                <ul>
-                {props.countries[0].languages.map(entry =>
-                    <li key={entry.iso639_1}>
-                        {entry.name}
-                    </li>)
-                }
-                </ul>
-                <img src={props.countries[0].flag} alt={props.countries[0].name}
-                widht='100' height='100'/>
+                <ShowOneCountry country={props.countries[0]} />
+                <ShowWeather weather={props.weather} setWeather={props.setWeather} 
+                capital={props.countries[0].capital} />
             </div>
         )
     }
 
     return (
-        null
+        <div>
+            No match found
+        </div>
     )
 }
 

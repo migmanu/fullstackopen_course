@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import PersonForm from './components/PersonForm'
 import Filter from './components/Filter'
 import ShowPersons from './components/ShowPersons'
+import personService from './services/persons'
 import axios from 'axios'
 
 const App = () => {
@@ -13,13 +14,13 @@ const App = () => {
 
 
   useEffect(() => {
-    /* fetches persons array from local server. Sets persons and sets toShow   
+    /* fetches persons array from local server using personService. Sets persons and sets toShow   
     so the app displays whole name list if no search is performed  */
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        setPersons(response.data)
-        setToShow(response.data)
+    personService
+      .getAll()
+      .then(initialPersons => {
+        setPersons(initialPersons)
+        setToShow(initialPersons)
       })
   }, [])
 

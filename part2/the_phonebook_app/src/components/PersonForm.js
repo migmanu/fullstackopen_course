@@ -1,4 +1,5 @@
 import React from 'react'
+import personService from '../services/persons'
 
 const PersonForm = (props) => {
 
@@ -14,10 +15,16 @@ const PersonForm = (props) => {
           name: props.newName,
           number: props.newNumber 
         }
-        props.setPersons(props.persons.concat(personObject))
-        props.setNewName('')
-        props.setNewNumber('')
-        props.setToShow(props.toShow.concat(personObject))
+
+        personService
+          .create(personObject) //To Do: check if server should update automatically after submit
+          .then(returnedPerson => {
+            props.setPersons(props.persons.concat(returnedPerson))
+            props.setNewName('')
+            props.setNewNumber('')
+            props.setToShow(props.toShow.concat(returnedPerson))
+
+          })
       }
 
     return (
