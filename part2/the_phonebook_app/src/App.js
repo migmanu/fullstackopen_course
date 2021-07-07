@@ -60,7 +60,7 @@ const App = () => {
         newNumber={newNumber} setNewNumber={setNewNumber} toShow={toShow} setToShow={setToShow} 
         handleNewName={handleNewName} handleNewNumber={handleNewNumber} />
       <h3>Numbers</h3>
-      <ShowPersons toShow={toShow} />
+      <ShowPersons toShow={toShow} setToShow={setToShow} persons={persons} setPersons={setPersons} />
     </div>
   )
 }
