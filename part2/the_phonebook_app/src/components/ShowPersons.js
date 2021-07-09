@@ -2,16 +2,18 @@ import React from 'react'
 import personService from '../services/persons'
 
 const ShowPersons = (props) => {
-    //  returns list of persons to show. Input: array
+    //  returns list of persons to show. Input: array of persons objects. Provides erase button
     const handleErase = id => {
-        const newPersons = props.persons.filter((item) => item.id !== id)
-        personService
-            .erase(id)
-            .then((erasedPerson) => {
-                props.setPersons(newPersons)
-                props.setToShow(newPersons)
-                window.alert('Person deleted! See you never...')
-            })
+        // erases person object from toShow list using erase method defined in services/persons.js
+        if (window.confirm('U sure u never gonna call them?')) {
+            personService
+                .erase(id)
+                .then(() => {
+                    props.setPersons(props.persons.filter((item) => item.id !== id))
+                    props.setToShow(props.toShow.filter((item) => item.id !== id))
+                    
+                })
+            }
     }
 
     return (
@@ -20,7 +22,7 @@ const ShowPersons = (props) => {
                 {props.toShow.map(entry =>
                     <li key={entry.name}>
                         {entry.name}  {entry.number} &nbsp;
-                        <button onClick={() => handleErase(entry.id)}>Erase</button>
+                        <button onClick={() => handleErase(entry.id)}>erase</button>
                     </li>)
                 }
             </ul>

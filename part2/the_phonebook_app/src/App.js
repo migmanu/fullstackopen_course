@@ -3,7 +3,6 @@ import PersonForm from './components/PersonForm'
 import Filter from './components/Filter'
 import ShowPersons from './components/ShowPersons'
 import personService from './services/persons'
-import axios from 'axios'
 
 const App = () => {
   const [ persons, setPersons ] = useState([])
@@ -12,10 +11,10 @@ const App = () => {
   const [ search, setSearch ] = useState('')
   const [ toShow, setToShow] = useState(persons)
 
-
   useEffect(() => {
-    /* fetches persons array from local server using personService. Sets persons and sets toShow   
-    so the app displays whole name list if no search is performed  */
+    /* fetches persons array from local server using personService (/services/persons.js). 
+    Sets persons and toShow states so the app displays whole name list while no search is 
+    performed in contacts filter  */
     personService
       .getAll()
       .then(initialPersons => {
@@ -39,12 +38,11 @@ const App = () => {
   }
 
   const showElements = (search, persons) => {
-    //  compares search state with persons names. Case insensitive. Returns array with matched elements.  
+    //compares search state with persons names. Case insensitive. Returns array with matched elements.  
     const elementMatchArray = []
-
     persons.forEach(element => {
       if (element.name.substring(0, search.length).toLowerCase() === search.toLowerCase()) {
-        elementMatchArray.push({name: element.name, number: element.number})
+        elementMatchArray.push({name: element.name, number: element.number, id: element.id})
         }
       }
     )
