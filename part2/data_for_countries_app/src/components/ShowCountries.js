@@ -38,8 +38,7 @@ const ShowCountries = (props) => {
         return (
             <div>
                 <ShowOneCountry country={props.countries[0]} />
-                <ShowWeather weather={props.weather} setWeather={props.setWeather} 
-                capital={props.countries[0].capital} />
+                <ShowWeather weather={props.weather} capital={props.countries[0].capital} />
             </div>
         )
     }

@@ -53,7 +53,7 @@ const App = () => {
         Data for countries App
       </h1>
       <SearchBar search={search} handleSearch={handleSearch} />
-      <ShowCountries countries={countries} setQuery={setQuery} weather={weather}
+      <ShowCountries countries={countries} setQuery={setQuery} weather={weather} 
       handleWeatherQuery={handleWeatherQuery} />
     </div>
   );
