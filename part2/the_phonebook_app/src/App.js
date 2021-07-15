@@ -3,6 +3,7 @@ import PersonForm from './components/PersonForm'
 import Filter from './components/Filter'
 import ShowPersons from './components/ShowPersons'
 import personService from './services/persons'
+import Notification from './components/Notification'
 
 const App = () => {
   const [ persons, setPersons ] = useState([])
@@ -10,6 +11,7 @@ const App = () => {
   const [ newNumber, setNewNumber] = useState('')
   const [ search, setSearch ] = useState('')
   const [ toShow, setToShow] = useState(persons)
+  const [ errorMessage, setGUIMessage] = useState(null)
 
   useEffect(() => {
     /* fetches persons array from local server using personService (/services/persons.js). 
@@ -52,13 +54,15 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={errorMessage} />
       <Filter search={search} handleSearch={handleSearch} />
       <h3>Add new</h3>
       <PersonForm persons={persons} setPersons={setPersons} newName={newName} setNewName={setNewName} 
         newNumber={newNumber} setNewNumber={setNewNumber} toShow={toShow} setToShow={setToShow} 
-        handleNewName={handleNewName} handleNewNumber={handleNewNumber} />
+        handleNewName={handleNewName} handleNewNumber={handleNewNumber} setGUIMessage={setGUIMessage} />
       <h3>Numbers</h3>
-      <ShowPersons toShow={toShow} setToShow={setToShow} persons={persons} setPersons={setPersons} />
+      <ShowPersons toShow={toShow} setToShow={setToShow} persons={persons} setPersons={setPersons}
+      setGUIMessage={setGUIMessage} />
     </div>
   )
 }
