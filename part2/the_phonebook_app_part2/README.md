@@ -1,3 +1,8 @@
+#IMPORTANT:
+
+## for evaluating phonebook_app related to backend and fulstack exercises from part3 fo the course I had to create a copy of this app in the part3 folder. I did this for I was unsure if modifying the part2 version would complicate evaluation. Part3 version of this app can be found at https://github.com/migmanu/fullstackopen_course/tree/main/part3/the_phonebook_app_part3
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
